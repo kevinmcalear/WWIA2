@@ -4,7 +4,7 @@ class CreateVenues < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :coordinates
       t.string :address
-      t.references :venue_admin, foreign_key: true
+      t.bigint :venue_admin_id, foreign_key: true
       t.references :region, foreign_key: true
 
       t.timestamps

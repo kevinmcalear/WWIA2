@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2020_01_18_071643) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["job_id"], name: "index_applications_on_job_id"
-    t.index ["traveller_id"], name: "index_applications_on_traveller_id"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -54,12 +53,6 @@ ActiveRecord::Schema.define(version: 2020_01_18_071643) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
-  create_table "travellers", force: :cascade do |t|
-    t.string "resume"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -76,11 +69,6 @@ ActiveRecord::Schema.define(version: 2020_01_18_071643) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "venue_admins", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "venues", force: :cascade do |t|
     t.string "name"
     t.string "coordinates"
@@ -90,14 +78,11 @@ ActiveRecord::Schema.define(version: 2020_01_18_071643) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["region_id"], name: "index_venues_on_region_id"
-    t.index ["venue_admin_id"], name: "index_venues_on_venue_admin_id"
   end
 
   add_foreign_key "applications", "jobs"
-  add_foreign_key "applications", "travellers"
   add_foreign_key "jobs", "venues"
   add_foreign_key "reviews", "applications"
   add_foreign_key "reviews", "users"
   add_foreign_key "venues", "regions"
-  add_foreign_key "venues", "venue_admins"
 end
